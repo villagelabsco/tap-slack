@@ -56,10 +56,6 @@ class ChannelsStream(SlackStream):
         row["team_name"] = self.base_info.get("team", "")
         row["workspace_url"] = self.base_info.get("url", "")
 
-        # Convert any integer timestamps to strings to match schema
-        if "updated" in row and isinstance(row["updated"], int):
-            row["updated"] = str(row["updated"])
-
         if is_archived:
             return
         if self._is_channel_included(channel_id):
