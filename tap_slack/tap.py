@@ -9,24 +9,27 @@ from singer_sdk import typing as th
 
 from tap_slack.streams import (
     ChannelsStream,
-    ChannelMembersStream,
-    MessagesStream,
-    ThreadsStream,
-    UsersStream,
-    MessageReactionsStream,
-    ThreadReactionsStream,
+    # ChannelMembersStream,
+    # MessagesStream,
+    # ThreadsStream,
+    # UsersStream,
+    # MessageReactionsStream,
+    # ThreadReactionsStream,
 )
 
+# TODO - turn all of these streams back on (except ChannelMembers) when our Slack app is 
+# approved. Right now we just need ChannelsStream to run and auto-join public channels
+# via the post_process method
 STREAM_TYPES = [
     ChannelsStream,
     # For now, disable the stream of members included in a channel
     # It is not very useful information, and not used by Argo reports
     # ChannelMembersStream,
-    MessagesStream,
-    ThreadsStream,
-    UsersStream,
-    MessageReactionsStream,
-    ThreadReactionsStream,
+    # MessagesStream,
+    # ThreadsStream,
+    # UsersStream,
+    # MessageReactionsStream,
+    # ThreadReactionsStream,
 ]
 ADMIN_STREAM_TYPES = []
 
