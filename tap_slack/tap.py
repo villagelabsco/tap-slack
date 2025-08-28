@@ -17,8 +17,8 @@ from tap_slack.streams import (
     # ThreadReactionsStream,
 )
 
-# TODO - turn all of these streams back on when our Slack app is approved
-# Right now we just need ChannelsStream to run and auto-join public channels
+# TODO - turn all of these streams back on (except ChannelMembers) when our Slack app is 
+# approved. Right now we just need ChannelsStream to run and auto-join public channels
 # via the post_process method
 STREAM_TYPES = [
     ChannelsStream,
