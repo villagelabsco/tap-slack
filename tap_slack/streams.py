@@ -62,8 +62,10 @@ class ChannelsStream(SlackStream):
         selected_channels = self.config.get("selected_channels")
         excluded_channels = self.config.get("excluded_channels", [])
         if channel_id in excluded_channels:
+                self.logger.info("Channel id %s is blocklisted -> not auto-joining this channel.", channel_id)
                 return False
         if selected_channels and channel_id not in selected_channels:
+                self.logger.info("This network has an allowlist for auto-joining channels, and %s is not allowlisted -> not auto-joining this channel.", channel_id)
                 return False
         return True
 
