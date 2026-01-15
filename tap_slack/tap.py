@@ -80,6 +80,11 @@ class TapSlack(Tap):
             description="A list of channel IDs that should not be retrieved. Excluding overrides a selected setting, so if a channel is included in both selected and excluded, it will be excluded.",
         ),
         th.Property(
+            "blocklisted_channel_name_prefixes",
+            th.ArrayType(th.StringType),
+            description="A list of channel name prefixes that should not be retrieved. Any channel whose name starts with one of these prefixes will be excluded.",
+        ),
+        th.Property(
             "include_admin_streams",
             th.BooleanType,
             default=False,
