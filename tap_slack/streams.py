@@ -71,9 +71,9 @@ class ChannelsStream(SlackStream):
                 self.logger.info("Channel id %s is blocklisted -> not auto-joining this channel.", channel_id)
                 return False
         for prefix in blocklisted_prefixes:
-                if channel_name.startswith(prefix):
-                        self.logger.info("Channel name '%s' starts with blocklisted prefix '%s' -> not including this channel.", channel_name, prefix)
-                        return False
+            if channel_name.startswith(prefix):
+                self.logger.info("Channel name '%s' starts with blocklisted prefix '%s' -> not auto-joining this channel.", channel_name, prefix)
+                return False
         if selected_channels and channel_id not in selected_channels:
                 self.logger.info("This network has an allowlist for auto-joining channels, and %s is not allowlisted -> not auto-joining this channel.", channel_id)
                 return False
