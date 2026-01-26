@@ -85,6 +85,12 @@ class TapSlack(Tap):
             description="A list of channel name prefixes that should not be retrieved. Any channel whose name starts with one of these prefixes will be excluded.",
         ),
         th.Property(
+            "disable_join_slack_connect_channels",
+            th.BooleanType,
+            default=False,
+            description="Whether to prevent auto-joining Slack Connect channels (channels with is_ext_shared=true).",
+        ),
+        th.Property(
             "include_admin_streams",
             th.BooleanType,
             default=False,

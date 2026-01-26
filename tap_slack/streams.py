@@ -58,12 +58,14 @@ class ChannelsStream(SlackStream):
 
         if is_archived:
             return
-        if self._is_channel_included(channel_id, row["name"]):
+        if self._is_channel_included(row):
             if not row["is_member"] and self.config.get("auto_join_channels", False):
                 self._join_channel(channel_id)
             return row
 
-    def _is_channel_included(self, channel_id: str, channel_name: str) -> bool:
+    def _is_channel_included(self, row: dict) -> bool:
+        channel_id = row["id"]
+        channel_name = row["name"]
         selected_channels = self.config.get("selected_channels")
         excluded_channels = self.config.get("excluded_channels", [])
         blocklisted_prefixes = self.config.get("blocklisted_channel_name_prefixes", [])
@@ -77,6 +79,12 @@ class ChannelsStream(SlackStream):
         if selected_channels and channel_id not in selected_channels:
                 self.logger.info("This network has an allowlist for auto-joining channels, and %s is not allowlisted -> not auto-joining this channel.", channel_id)
                 return False
+        if self.config.get("disable_join_slack_connect_channels", False) and row.get("is_ext_shared"):
+            self.logger.info(
+                "Channel '%s' is a Slack Connect channel (is_ext_shared=true) and this network has disabled joining Slack Connect channels -> not auto-joining.",
+                channel_name
+            )
+            return False
         return True
 
     def _get_auth_info(self) -> requests.Response:
