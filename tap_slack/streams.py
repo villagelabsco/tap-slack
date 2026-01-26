@@ -81,7 +81,7 @@ class ChannelsStream(SlackStream):
                 return False
         if self.config.get("disable_join_slack_connect_channels", False) and row.get("is_ext_shared"):
             self.logger.info(
-                "Channel '%s' is a Slack Connect channel (is_ext_shared=true) -> not auto-joining.",
+                "Channel '%s' is a Slack Connect channel (is_ext_shared=true) and this network has disabled joining Slack Connect channels -> not auto-joining.",
                 channel_name
             )
             return False
